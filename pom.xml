@@ -10,7 +10,8 @@
   <modules>
     <module>domain</module>
     <module>common</module>
-    <module>service</module>
+    <module>core</module>
+    <module>api</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -30,6 +31,12 @@
     <java.version>1.8</java.version>
     <joda.time.version>2.9.9</joda.time.version>
     <lombok.version>1.16.18</lombok.version>
+    <guava.version>23.6-jre</guava.version>
+    <api.version>0.0.1-SNAPSHOT</api.version>
+    <common.version>0.0.1-SNAPSHOT</common.version>
+    <core.version>0.0.1-SNAPSHOT</core.version>
+    <domain.version>0.0.1-SNAPSHOT</domain.version>
+    <jackson.version>2.8.10</jackson.version>
   </properties>
 
   <dependencies>
@@ -47,26 +54,94 @@
 
 
   <dependencyManagement>
+
     <dependencies>
+
+      <!--modules-->
+      <dependency>
+        <groupId>com</groupId>
+        <artifactId>api</artifactId>
+        <version>${api.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com</groupId>
+        <artifactId>common</artifactId>
+        <version>${common.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com</groupId>
+        <artifactId>core</artifactId>
+        <version>${core.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com</groupId>
+        <artifactId>domain</artifactId>
+        <version>${domain.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${guava.version}</version>
+      </dependency>
+
       <dependency>
         <groupId>joda-time</groupId>
         <artifactId>joda-time</artifactId>
         <version>${joda-time.version}</version>
       </dependency>
+
       <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
         <version>${lombok.version}</version>
       </dependency>
+
     </dependencies>
   </dependencyManagement>
 
   <build>
     <plugins>
+
       <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.7.0</version>
+        <configuration>
+          <fork>true</fork>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <compilerVersion>${java.version}</compilerVersion>
+        </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-idea-plugin</artifactId>
+        <version>2.2.1</version>
+        <configuration>
+          <linkModules>false</linkModules>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 

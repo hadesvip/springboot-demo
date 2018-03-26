@@ -1,3 +1,5 @@
 spring:
   application:
     name: springboot-demo-web-app
+  profiles:
+    active: dev
